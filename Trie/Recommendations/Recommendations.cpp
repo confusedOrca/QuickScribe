@@ -11,7 +11,7 @@ void Recommendations::addWord(std::string word, int frequency) {
 
     if (frequency <= 0) throw std::invalid_argument("Frequency must be greater than 0.");
 
-    if (!recommendations.empty() && frequency < recommendations.top().frequency) return;
+    if (recommendations.size() == maxSize && frequency < recommendations.top().frequency) return;
     
     Recommendation newRec{word, frequency};
     recommendations.push(newRec);

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdexcept>
-#include "./Node.h"
+#include "Node.h"
 using namespace std;
 
 const string GREEN = "\033[32m";

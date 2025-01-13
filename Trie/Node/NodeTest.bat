@@ -2,15 +2,15 @@
 
 cd /d "%~dp0"
 
-set OUTPUT=NodeTest.exe
-set CLASS_FILE=Node.cpp
 set TEST_FILE=NodeTest.cpp
+set LIBRARY_FILE=Node.lib
+set OUTPUT=NodeTest.exe
 
-echo Compiling %CLASS_FILE% and %TEST_FILE%...
-cl /EHsc /Fe:%OUTPUT% %CLASS_FILE% %TEST_FILE%
+echo Compiling and linking %TEST_FILE% with %LIBRARY_FILE% to create %OUTPUT%...
+cl /EHsc /Fe:%OUTPUT% %TEST_FILE% %LIBRARY_FILE%
 
 if errorlevel 1 (
-    echo Compilation failed. Please check the code for errors.
+    echo Compilation and linking of %TEST_FILE% failed. Please check the code for errors.
     exit /b 1
 )
 

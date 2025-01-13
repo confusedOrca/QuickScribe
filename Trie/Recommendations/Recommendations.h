@@ -30,7 +30,7 @@ private:
         }
 
         bool operator==(const Recommendation& other) const {
-            return word == other.word;
+            return frequency == other.frequency;
         }
     };
 

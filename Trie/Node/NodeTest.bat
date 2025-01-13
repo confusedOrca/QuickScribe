@@ -1,5 +1,7 @@
 @echo off
 
+cd /d "%~dp0"
+
 set OUTPUT=NodeTest.exe
 set CLASS_FILE=Node.cpp
 set TEST_FILE=NodeTest.cpp

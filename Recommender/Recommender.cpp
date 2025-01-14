@@ -20,10 +20,21 @@ void Recommender::insert(const std::string& word) {
     curr->wordFrequency++;
 }
 
+void Recommender::insertNTimes(const std::string& word, int N) {
+    Node* curr = trieRoot;
+    for (char c : word) {
+        if (curr->children.find(c) == curr->children.end()) {
+            curr->children[c] = new Node();
+        }
+        curr = curr->children[c];
+    }
+    curr->wordFrequency += N;
+}
+
 std::vector<std::string> Recommender::recommend(const std::string& prefix, int n) {
     Node* curr = trieRoot;
     for (char c : prefix) {
-        if (curr->children.find(c) == curr->children.end()) return {};
+        if (curr->children.find(c) == curr->children.end()) return {prefix};
         curr = curr->children[c];
     }
 

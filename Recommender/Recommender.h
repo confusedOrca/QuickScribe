@@ -41,6 +41,13 @@ public:
     void insert(const std::string& word);
 
     /**
+     * inserts a word N number of times
+     * @param word The word to insert into the trie.
+     * @param N The number of times to insert the word.
+     */
+    void insertNTimes(const std::string& word, int N);
+
+    /**
      * Generates a list of word recommendations based on a given prefix.
      * @param prefix The prefix to search for in the trie.
      * @param n The maximum number of recommendations to return.

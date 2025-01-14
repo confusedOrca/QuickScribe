@@ -1,6 +1,5 @@
 #include "Recommendations.h"
 #include <stdexcept>
-#include <iostream>
 
 Recommendations::Recommendations(int maxSize) : maxSize(maxSize) {
     if (maxSize <= 0) throw std::invalid_argument("maxSize must be greater than 0.");

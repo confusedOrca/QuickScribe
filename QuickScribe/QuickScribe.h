@@ -16,6 +16,7 @@
 class QuickScribe {
 private:
     int recommendationSize;  ///< The maximum number of recommendations to fetch.
+    std::vector<std::string> emptyStringRecommendations; ///< Cached recommendations for empty string
     StringCarousel* carousel; ///< Carousel to manage and navigate recommendations.
     TreeSerializer* serializer; ///< Serializer for saving and loading the recommendation trie.
     Recommender* recommender; ///< Recommender system for generating word suggestions.

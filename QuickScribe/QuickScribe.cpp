@@ -18,6 +18,7 @@ QuickScribe::QuickScribe(std::string filePath, int recommendationSize):
     } else {
         Node* root = serializer->deserialize(this->filePath);
         recommender->setTrieRoot(root);
+        emptyStringRecommendations = recommender->recommend("", recommendationSize);
     }
 }
 
@@ -46,10 +47,12 @@ void QuickScribe::insertSentence(const std::string& sentence) {
         std::transform(word.begin(), word.end(), word.begin(), ::tolower);
         insertWord(word);
     }
+    emptyStringRecommendations = recommender->recommend("", recommendationSize);
 }
 
 std::string QuickScribe::fetchRecommendations(const std::string& prefix) {
-    std::vector<std::string> recommendations = recommender->recommend(prefix, recommendationSize);
+    std::vector<std::string> recommendations = emptyStringRecommendations;
+    if(!prefix.empty()) recommendations = recommender->recommend(prefix, recommendationSize);
 
     if (carousel) delete carousel;
     carousel = new StringCarousel(recommendations);

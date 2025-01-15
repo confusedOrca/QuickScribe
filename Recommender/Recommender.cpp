@@ -9,6 +9,27 @@ Recommender::Recommender() {
     trieRoot = new Node();
 }
 
+Recommender::~Recommender() {
+    destroyTree(trieRoot);
+}
+
+void Recommender::destroyTree(Node* node) {
+    if (node == nullptr) return;
+    for (auto& [character, nextNode] : node->children) {
+        destroyTree(nextNode);
+    }
+    delete node;
+}
+
+void Recommender::setTrieRoot(Node* root) {
+    if (trieRoot != nullptr) destroyTree(trieRoot);
+    trieRoot = root;
+}
+
+Node* Recommender::getTrieRoot() {
+    return trieRoot;
+}
+
 void Recommender::insert(const std::string& word) {
     Node* curr = trieRoot;
     for (char c : word) {

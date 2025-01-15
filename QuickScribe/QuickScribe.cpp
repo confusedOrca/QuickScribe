@@ -57,16 +57,16 @@ std::string QuickScribe::fetchRecommendations(const std::string& prefix) {
 }
 
 std::string QuickScribe::currentRecommendation() {
-    if (!carousel) return "No recommendations available.";
+    if (!carousel) return fetchRecommendations("");
     return carousel->getCurrent();
 }
 
 std::string QuickScribe::nextReccomendation() {
-    if (!carousel) return "";
+    if (!carousel) return fetchRecommendations("");
     return carousel->moveNext();
 }
 
 std::string QuickScribe::previousRecommendation() {
-    if (!carousel) return "No recommendations available.";
+    if (!carousel) return fetchRecommendations("");
     return carousel->movePrev();
 }

@@ -31,8 +31,24 @@ private:
      */
     void collectWords(Node* node, const std::string& prefix, Recommendations& recommendations);
 
+    void destroyTree(Node* node);
+
 public:
     Recommender();
+
+    ~Recommender();
+
+    /**
+     * Sets the root node of the trie structure.
+     * @param root Pointer to the root node of the trie.
+     */
+    void setTrieRoot(Node* root);
+
+    /**
+     * Gets the root node of the trie structure.
+     * @return Pointer to the root node of the trie.
+     */
+    Node* getTrieRoot();
 
     /**
      * Inserts a word into the trie structure.

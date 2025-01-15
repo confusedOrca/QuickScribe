@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include "./StringCarousel/StringCarousel.h"
 #include "../Serializer/TreeSerializer.h"
 #include "../Recommender/Recommender.h"
@@ -16,11 +17,21 @@
 class QuickScribe {
 private:
     int recommendationSize;  ///< The maximum number of recommendations to fetch.
-    std::vector<std::string> emptyStringRecommendations; ///< Cached recommendations for empty string
     StringCarousel* carousel; ///< Carousel to manage and navigate recommendations.
     TreeSerializer* serializer; ///< Serializer for saving and loading the recommendation trie.
     Recommender* recommender; ///< Recommender system for generating word suggestions.
     std::string filePath; ///< Path to the file used for saving the recommendation trie.
+    std::map<std::string, std::vector<std::string>> cache; ///< Prefixes cached to reduce searches
+    /**
+     * @brief caches all prefixes less than 3 character long
+     */
+    void cachePrefixes();
+
+    /**
+     * @brief Inserts a single word into the recommendation trie.
+     * @param word The word to insert.
+     */
+    void insertWord(const std::string& word);
 
 public:
     /**
@@ -43,12 +54,6 @@ public:
      * @brief Saves the current state of the recommendation trie to a file.
      */
     void save();
-
-    /**
-     * @brief Inserts a single word into the recommendation trie.
-     * @param word The word to insert.
-     */
-    void insertWord(const std::string& word);
 
     /**
      * @brief Inserts a sentence into the recommendation trie by splitting it into individual words.

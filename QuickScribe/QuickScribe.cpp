@@ -1,9 +1,26 @@
 #include "QuickScribe.h"
 #include <fstream>
 #include <sstream>
-#include <stdexcept>
 #include <algorithm>
-#include <iostream>
+#include <queue>
+
+void QuickScribe::cachePrefixes() {
+    Node* root = recommender->getTrieRoot();
+    if (!root) return;
+
+    std::queue<std::pair<Node*, std::string>> q;
+    q.push({root, ""});
+    while (!q.empty()) {
+        auto& [currNode, currPrefix] = q.front();
+        q.pop();
+        if (currPrefix.length() == 4) break;
+
+        cache[currPrefix] = recommender->recommend(currPrefix, recommendationSize);
+        for (const auto& child : currNode->children) {
+            q.push({child.second, currPrefix + child.first});
+        }
+    }
+}
 
 QuickScribe::QuickScribe(std::string filePath, int recommendationSize): 
     filePath(std::move(filePath)), 
@@ -18,7 +35,7 @@ QuickScribe::QuickScribe(std::string filePath, int recommendationSize):
     } else {
         Node* root = serializer->deserialize(this->filePath);
         recommender->setTrieRoot(root);
-        emptyStringRecommendations = recommender->recommend("", recommendationSize);
+        cachePrefixes();
     }
 }
 
@@ -46,13 +63,17 @@ void QuickScribe::insertSentence(const std::string& sentence) {
         word.erase(std::remove_if(word.begin(), word.end(), ::ispunct), word.end());
         std::transform(word.begin(), word.end(), word.begin(), ::tolower);
         insertWord(word);
+        for (int i = 0; i <= 3 && i <= word.length(); i++) {
+            std::string prefix = word.substr(0, i);
+            cache[prefix] = recommender->recommend(prefix, recommendationSize);
+        }
     }
-    emptyStringRecommendations = recommender->recommend("", recommendationSize);
 }
 
 std::string QuickScribe::fetchRecommendations(const std::string& prefix) {
-    std::vector<std::string> recommendations = emptyStringRecommendations;
-    if(!prefix.empty()) recommendations = recommender->recommend(prefix, recommendationSize);
+    std::vector<std::string> recommendations;
+    if (cache.find(prefix) != cache.end()) recommendations = cache[prefix];
+    else recommendations = recommender->recommend(prefix, recommendationSize);
 
     if (carousel) delete carousel;
     carousel = new StringCarousel(recommendations);

@@ -7,11 +7,12 @@
 /**
  * @class Carousel
  * @brief A template class that iterates over iterable objects in circular fashion.
- * @tparam Iterable The type of the iterable container (e.g., std::vector, std::list).
+ * @tparam Iterable The type of the iterable container (e.g., std::vector, std::list, etc.).
  */
 template <typename Iterable>
 class Carousel {
 private:
+    Iterable data;  ///< The entire data container.
     typename Iterable::iterator beginIter;  ///< The beginning iterator of the iterable.
     typename Iterable::iterator endIter;    ///< The ending iterator of the iterable.
     typename Iterable::iterator currentIter; ///< The current iterator.
@@ -22,7 +23,7 @@ public:
      * @param iterable The iterable object (e.g., vector, list, deque, etc.).
      * @throws std::invalid_argument if the iterable is empty.
      */
-    Carousel(Iterable& iterable);
+    explicit Carousel(Iterable iterable);
 
     /**
      * @brief Gets the current element in the carousel.
@@ -44,12 +45,13 @@ public:
 };
 
 template <typename Iterable>
-Carousel<Iterable>::Carousel(Iterable& iterable) {
-    if (std::distance(iterable.begin(), iterable.end()) < 1) {
+Carousel<Iterable>::Carousel(Iterable iterable) {
+    if (iterable.empty()) {
         throw std::invalid_argument("Cannot construct empty carousel.");
     }
-    beginIter = iterable.begin();
-    endIter = iterable.end();
+    data = iterable;
+    beginIter = data.begin();
+    endIter = data.end();
     currentIter = beginIter;
 }
 

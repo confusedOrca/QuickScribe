@@ -14,7 +14,7 @@ QuickScribe::QuickScribe(std::string filePath, int recommendationSize)
         std::cout << "File not found! Creating one." << std::endl;
         if (filePath.size() >= 4 && filePath.substr(filePath.size() - 4) == ".bin") {
             std::cout << "File will be saved as a .bin file." << std::endl;
-            save(); // Ensure the save function works
+            save();
         } else {
             std::cout << "Invalid file path: " << filePath << " (must end with .bin)" << std::endl;
             throw std::invalid_argument("Invalid file path: Must end with .bin if creating a new file.");

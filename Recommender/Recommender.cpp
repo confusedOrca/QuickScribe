@@ -71,9 +71,18 @@ void Recommender::collectWords(Node* node, const std::string& prefix, Recommenda
 
 
     if (node->wordFrequency > 0) {
-            std::lock_guard<std::mutex> lock(mtx);
+        std::lock_guard<std::mutex> lock(mtx);
+        try {
             recommendations.addWord(prefix, node->wordFrequency);
+        } catch (const std::invalid_argument& e) {
+            if (std::string(e.what()) == "Word already exists.") {
+                //do nothing
+            } else {
+                throw;
+            }
+        }
     }
+
 
     for (auto& [character, nextNode] : node->children) {
         std::string newPrefix = prefix + character;

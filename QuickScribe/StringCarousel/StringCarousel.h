@@ -18,6 +18,12 @@ public:
      */
     explicit StringCarousel(std::vector<std::string>& strings)
         : Carousel<std::vector<std::string>>(strings) {}
+
+    /**
+     * @brief Default constructor that initializes the StringCarousel with an empty vector.
+     */
+    StringCarousel() 
+        : Carousel<std::vector<std::string>>(std::vector<std::string>{""}) {}
 };
 
 #endif // STRINGCAROUSEL_H

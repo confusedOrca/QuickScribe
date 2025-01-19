@@ -19,7 +19,6 @@ Node* TreeSerializer::deserialize(const std::string& filePath) {
     return root;
 }
 
-
 void TreeSerializer::serializeNode(std::ofstream& outFile, Node* node) {
     if (!node) return;
 

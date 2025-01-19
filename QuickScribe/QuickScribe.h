@@ -17,15 +17,10 @@
 class QuickScribe {
 private:
     int recommendationSize;  ///< The maximum number of recommendations to fetch.
-    StringCarousel* carousel; ///< Carousel to manage and navigate recommendations.
-    TreeSerializer* serializer; ///< Serializer for saving and loading the recommendation trie.
-    Recommender* recommender; ///< Recommender system for generating word suggestions.
+    StringCarousel carousel; ///< Carousel to manage and navigate recommendations.
+    TreeSerializer serializer; ///< Serializer for saving and loading the recommendation trie.
+    Recommender recommender; ///< Recommender system for generating word suggestions.
     std::string filePath; ///< Path to the file used for saving the recommendation trie.
-    std::map<std::string, std::vector<std::string>> cache; ///< Prefixes cached to reduce searches
-    /**
-     * @brief caches all prefixes less than 3 character long
-     */
-    void cachePrefixes();
 
     /**
      * @brief Inserts a single word into the recommendation trie.

@@ -58,8 +58,7 @@ void testInsertAndFetch() {
             "add"
         );
 
-        quickScribe.save();  // Verify that the save method works and writes to file
-
+        quickScribe.save();
         cout << "----------------------------" << endl;
     } catch (const std::exception& e) {
         cerr << RED << "Exception during QuickScribe construction or operation: " << e.what() << RESET << endl;
@@ -80,14 +79,14 @@ void testPersistence() {
             "apple"
         );
 
-        result = quickScribe.nextReccomendation();  // Fix the spelling error
+        result = quickScribe.nextReccomendation(); 
         checkResult(
             result == "add",
             "Next recommendation for 'a': " + result,
             "add"
         );
 
-        result = quickScribe.nextReccomendation();  // Fix the spelling error
+        result = quickScribe.nextReccomendation(); 
         checkResult(
             result == "a",
             "Next recommendation for 'a': " + result,
@@ -101,7 +100,7 @@ void testPersistence() {
             "add"
         );
 
-        quickScribe.save();  // Verify that the save method works and writes to file
+        quickScribe.save();
 
         cout << "----------------------------" << endl;
     } catch (const std::exception& e) {
@@ -110,9 +109,9 @@ void testPersistence() {
 }
 
 int main() {
-    std::filesystem::remove("test.bin");  // Clean up before test
+    std::filesystem::remove("test.bin");
     testInsertAndFetch();
     testPersistence();
-    std::filesystem::remove("test.bin");  // Clean up after test
+    std::filesystem::remove("test.bin"); 
     return 0;
 }

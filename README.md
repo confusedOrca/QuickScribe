@@ -1,4 +1,4 @@
-# Local Autocomplete Program
+# QuickScribe
 
 A local autocomplete program that uses users' typing history to generate prefix trees and suggests words based on frequency.
 

@@ -1,2 +1,0 @@
-This folder will be used to serialize & store Prefix tree in binary format
-And to deserialize them at start of future runs.

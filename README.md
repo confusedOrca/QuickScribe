@@ -40,5 +40,8 @@ Local autocomplete program that tracks typing history in a prefix tree and provi
 - Replaces prefixes with word suggestions by simulating typing.
 
 ### Demonstration:
-![QuickScribe demo](demo.gif)
+<div align="center">
+  <img src="demo.gif" alt="Demo GIF" />
+</div>
+
 

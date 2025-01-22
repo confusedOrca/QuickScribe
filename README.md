@@ -14,7 +14,7 @@ Local autocomplete program that tracks typing history in a prefix tree and provi
 - A min-heap of the top `N` most frequently used words for a given prefix.
   - Priority is based on the frequency of words.
   - 0 <= `N` <= max size
-- Min Heap is used instead of Max Heap since we need to keep track of the least frequent word in our heap to decide whether to include an incoming word.
+- Min Heap is used instead of Max Heap since we must keep track of the least frequent word in our heap to decide whether to include an incoming word.
 - During retrieval, it builds a list of strings from end to beginning by continuously popping the root of the heap to get a list of `n` most frequent words in descending order of their frequency.
 
 ### 3. Serializer
@@ -35,5 +35,6 @@ Local autocomplete program that tracks typing history in a prefix tree and provi
 ### 6. QuickScribe Program
 - A keylogger is used to track words being typed.
 - A typing simulator is used to type programmatically.
-- Uses QuickScribe to fetch recommendations for current prefixes and cycle through them when `INSERT` is pressed.
+- Uses QuickScribe to fetch recommendations for prefixes.
+- Fetches and cycles through through suggestions when `INSERT` is pressed.
 - Replaces prefixes with word suggestions by simulating typing.

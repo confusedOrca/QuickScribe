@@ -38,3 +38,7 @@ Local autocomplete program that tracks typing history in a prefix tree and provi
 - Uses QuickScribe to fetch recommendations for prefixes.
 - Fetches and cycles through through suggestions when `INSERT` is pressed.
 - Replaces prefixes with word suggestions by simulating typing.
+
+### Demonstration:
+![QuickScribe demo](demo.gif)
+

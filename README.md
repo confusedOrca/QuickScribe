@@ -36,7 +36,7 @@ Local autocomplete program that tracks typing history in a prefix tree and provi
 - A keylogger is used to track words being typed.
 - A typing simulator is used to type programmatically.
 - Uses QuickScribe to fetch recommendations for prefixes.
-- Fetches and cycles through through suggestions when `INSERT` is pressed.
+- Fetches and cycles through suggestions (top 3 by default) when `INSERT` is pressed.
 - Replaces prefixes with word suggestions by simulating typing.
 
 ### Demonstration:
